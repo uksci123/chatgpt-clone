@@ -4,12 +4,25 @@
 
 @layer components {
    .infoText{
-     @apply p-4  bg-gray-700/50 rounded-lg max-w-[300px]; 
+      @apply p-4  bg-gray-700/50 rounded-lg max-w-[300px]; 
    }
 
    .chatRow{
-    @apply px-4 py-3 rounded-lg text-sm flex items-center justify-center
-    space-x-2 hover:bg-gray-700/70 cursor-pointer text-gray-300
-    transition-all duration-200 ease-out
+      @apply px-4 py-3 rounded-lg text-sm flex items-center justify-center
+      space-x-2 hover:bg-gray-700/70 cursor-pointer text-gray-300
+      transition-all duration-200 ease-out
+   }
+
+   .login{
+      @apply bg-[#11A37F] h-screen flex flex-col items-center
+      justify-center text-center
+   }
+
+   .loginButton{
+      @apply text-white text-3xl animate-pulse font-bold
+   }
+
+   .profileImg{
+      @apply h-12 w-12 rounded-full cursor-pointer hover:opacity-50
    }
 }

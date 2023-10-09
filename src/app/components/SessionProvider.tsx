@@ -3,10 +3,11 @@ import exp from "constants";
 import { Session } from "next-auth";
 import { SessionProvider as Provider } from "next-auth/react";
 
-type Props = {
-    children : React.ReactNode;
-    session : Session | null ; 
+interface Props {
+    children : React.ReactNode
+    session : Session | null 
 }
+
 export function SessionProvider({children ,session}:Props){
   return (
     <Provider>
