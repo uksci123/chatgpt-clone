@@ -8,6 +8,7 @@ import Image from 'next/image'
 import { ClockIcon, EllipsisVerticalIcon } from '@heroicons/react/24/solid'
 import { db } from '../../../firebase'
 import ChatRow from './ChatRow'
+import ModelSelection from './ModelSelection'
 
 const SideBar = () => {
   const {data : session} = useSession(); 
@@ -26,8 +27,9 @@ const SideBar = () => {
             <div>
                     {/* New Chat*/}
                     <NewChat/>
-                <div>
+                <div className='hidden sm:inline'>
                     {/* Model Selection */}
+                    <ModelSelection/>
                 </div>
 
                     {/* Map through the Chat Row*/}

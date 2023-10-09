@@ -17,7 +17,7 @@ const firebaseConfig = {
 
 // Initialize Firebase
 // singleton pattern of codding 
-const app = getApps().length? getApp() : initializeApp(firebaseConfig);
+const app = getApps().length ? getApp() : initializeApp(firebaseConfig);
 
 // Now get the Database from the storage 
 
