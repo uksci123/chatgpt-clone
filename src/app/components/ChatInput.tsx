@@ -2,19 +2,27 @@
 import { PaperAirplaneIcon } from "@heroicons/react/24/solid"
 import { useSession } from "next-auth/react"
 import { FormEvent, useState } from "react"
-import { addDoc, collection, serverTimestamp } from "firebase/firestore"
+import { addDoc, collection, deleteDoc, doc, serverTimestamp } from "firebase/firestore"
 import { db } from "../../../firebase"
 import toast from "react-hot-toast"
+import ModelSelection from "./ModelSelection"
+import {useRouter } from 'next/navigation';
+import useSWR from "swr"
 type Props = {
     chatId : string
 }
 const ChatInput = ({chatId}:Props) => {
   const [prompt , setPrompt] = useState('');
   const {data : session} = useSession()
+  const router   = useRouter()
   
   // useSwr to use Model 
 
-  const model = 'text-curie-001'
+//   const model = 'text-curie-001'
+
+const {data : model} = useSWR('model' , {
+    fallbackData : 'text-davinci-003'
+  })
 
   const sendMessage = async(e : FormEvent<HTMLFormElement>) =>{
     e.preventDefault();
@@ -62,6 +70,11 @@ const ChatInput = ({chatId}:Props) => {
     })
   }
 
+  const removeChat = async() =>{
+    await deleteDoc(doc(db,'users',session?.user?.email!,'chats',chatId))
+    router.push('/')
+  }
+
   return (
     <div className="bg-gray-700/50 text-gray-400 rounded-lg text-sm">
         <form onSubmit={sendMessage} className="p-5 space-x-5 flex">
@@ -83,8 +96,13 @@ const ChatInput = ({chatId}:Props) => {
             </button>
         </form>
 
-        {/* Model Selection */}
-        <div></div>
+        <div className="md:hidden flex items-center justify-evenly mb-4  ">
+            {/*Remove chat*/}
+            <button onClick={removeChat} className="bg-white px-8 py-[9px] rounded-md">Remove Chat</button>
+            
+            {/* Model Selection */}
+            <ModelSelection/>
+        </div>
     </div>
   )
 }

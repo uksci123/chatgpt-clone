@@ -13,8 +13,8 @@ type Props = {
 const ChatRow = ({id}:Props) => {
   const pathname = usePathname()
   const router   = useRouter()
-  const {data : session } = useSession()
   const [active , setActive] = useState(false)
+  const {data : session } = useSession()
 
   const [message] = useCollection(
     collection(db,'users',session?.user?.email!,'chat',id,'message')
@@ -27,7 +27,7 @@ const ChatRow = ({id}:Props) => {
   useEffect(()=>{
     if(!pathname) return ; 
     setActive(pathname.includes(id))
-  },[pathname , id])
+  },[pathname,id])
 
   return (
     <Link href={`/chat/${id}`} className={`chatRow ${active && "bg-gray-700/50"}`}>

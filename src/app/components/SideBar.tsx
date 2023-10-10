@@ -10,6 +10,10 @@ import { db } from '../../../firebase'
 import ChatRow from './ChatRow'
 import ModelSelection from './ModelSelection'
 
+// type Props = {
+//   closeModal: () => void;
+// }
+
 const SideBar = () => {
   const {data : session} = useSession(); 
 
@@ -21,21 +25,30 @@ const SideBar = () => {
     )
   );
 
+
   return (
-    <div className='flex flex-col h-screen p-2'>
+    <div className='flex flex-col h-screen p-2 '>
         <div className='flex-1'>
             <div>
                     {/* New Chat*/}
                     <NewChat/>
-                <div className='hidden sm:inline'>
+                <div className='hidden md:inline'>
                     {/* Model Selection */}
                     <ModelSelection/>
                 </div>
+                <div className='flex flex-col space-y-2 my-2'>
+                    
+                    {loading && (
+                      <div className='text-center text-white animate-pulse'>
+                          <p>Loading Chat...</p>
+                      </div>
+                    )}
 
                     {/* Map through the Chat Row*/}
                     {chats?.docs.map(chat => (
                         <ChatRow key={chat.id} id={chat.id}/>
                     ))}
+                </div>
             </div>
         </div>
             {session && (

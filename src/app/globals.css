@@ -25,4 +25,8 @@
    .profileImg{
       @apply h-12 w-12 rounded-full cursor-pointer hover:opacity-50
    }
+
+   .menu{
+      @apply border p-1 rounded-md hover:bg-gray-700/70 cursor-pointer
+   }
 }
